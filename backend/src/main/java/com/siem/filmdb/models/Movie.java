@@ -1,9 +1,8 @@
 package com.siem.filmdb.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,13 +14,21 @@ public class Movie {
     @GeneratedValue
     private Long id;
     private String name;
+
+    @JdbcTypeCode(SqlTypes.JSON)
     private Director director;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Actor> actors = new ArrayList<>();
 
     public Movie(String name){
         this.name = name;
+    }
+
+    public Movie(String name, List<Actor> actors, Director director){
+        this.name = name;
+        this.actors = actors;
+        this.director = director;
     }
 
     public Movie() {
@@ -55,7 +62,7 @@ public class Movie {
         this.actors.addAll(actors);
     }
 
-    public void setActor(Actor actor) {
+    public void addActor(Actor actor) {
         this.actors.add(actor);
     }
 }

@@ -1,9 +1,6 @@
 package com.siem.filmdb.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +13,9 @@ public class Actor {
     private Long id;
     private String name;
 
-    @ManyToMany
+    @ManyToMany(cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE})
     private List<Movie> movies = new ArrayList<>();
 
     public Actor(String name) {

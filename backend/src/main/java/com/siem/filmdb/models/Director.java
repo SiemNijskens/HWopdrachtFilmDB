@@ -1,9 +1,6 @@
 package com.siem.filmdb.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +13,7 @@ public class Director {
     private Long id;
     private String name;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Movie> movies = new ArrayList<>();
 
     public Director(String name) {
@@ -44,6 +41,10 @@ public class Director {
 
     public void addMovie(Movie movie) {
         this.movies.add(movie);
+    }
+
+    public void setMovies(List<Movie> movies) {
+        this.movies = movies;
     }
 
     public void addMovies(List<Movie> movies) {

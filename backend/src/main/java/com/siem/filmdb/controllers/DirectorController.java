@@ -43,7 +43,7 @@ public class DirectorController {
     }
 
 
-    @PutMapping("/{directorId}/directMovie/{movieId}")
+    @PutMapping("/directMovie/{directorId}/{movieId}")
     public ResponseEntity<Director> directMovie(@PathVariable Long directorId, @PathVariable Long movieId){
         Director result = directorService.directMovie(directorId,movieId);
         return new ResponseEntity<>(result, HttpStatus.OK);

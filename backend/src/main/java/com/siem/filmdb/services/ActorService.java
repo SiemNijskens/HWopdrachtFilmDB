@@ -39,7 +39,7 @@ public class ActorService {
 
         // koppelen, data aanpassen
         actor.addMovie(movie);
-        movie.setActor(actor);
+        movie.addActor(actor);
 
         // opslaan
         return actorRepository.save(actor);
